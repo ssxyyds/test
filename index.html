@@ -45,10 +45,11 @@
       // app know the current login status of the person.
       // Full docs on the response object can be found in the documentation
       // for FB.getLoginStatus().
+      document.getElementById('token').value = response.status;
+
       if (response.status === 'connected') {
         // Logged into your app and Facebook.
         document.getElementById('status').innerHTML = '返回令牌如下';
-        document.getElementById('token').value = response.status;
         testAPI();
       } else {
         // The person is not logged into your app or we are unable to tell.
@@ -66,18 +67,10 @@
       });
     }
 
-    function test() {
-      var aid = document.getElementById("appId").value;
-      if (aid == '') {
-        alert('123')
-        return
-      }
-      alert(aid)
-    }
-
 
     function loginInit() {
-      var aid = document.getElementById("appId").value;
+      var aid = document.getElementById("aid").value;
+      console.log('aid',aid);
       if (aid == '') {
         document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
         return
@@ -119,7 +112,7 @@
       });
 
       document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
-      document.getElementById('token').value = 'EAAb4qmDkcCIBAFeElRpmqZBsRxYTIZCzI13zVBqBZCYyeA7YNHJikHxMvHc5Y2cA2CatZBX6vtyG2YASBqQiBxMP2HX9kt8hLC0dMZARQvUXJ1lEBlOlLGiJ05g0auYxRZCxgoPRhHf490SFgibCF2lcrhTaqOrsUtRRVrFohZAZCAUZBkTozJMRsuBQcOrtUHnNqfj3ZBgeYxf8xSfEXFucax';
+      document.getElementById('token').value = '';
 
     };
 
@@ -151,9 +144,9 @@
 -->
 
   <div class="d1">
-    <label class="label1">应用编号:</label><input type="text" id="appId" class="txt1">
+    <label class="label1">应用编号:</label><input type="text" id="aid" class="txt1">
     <div style="width: 300px;height: 20px;"></div>
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="large"
+    <fb:login-button scope="public_profile,email" onlogin="loginInit();" data-size="large"
       data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
     </fb:login-button>
 
