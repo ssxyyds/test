@@ -6,7 +6,7 @@
   <style type="text/css">
     .d1 {
       border: 1px;
-      width: 300px;
+      width: 350px;
       height: 400px;
       text-align: left;
       line-height: 40px;
@@ -69,24 +69,7 @@
 
 
     function loginInit() {
-      var aid = document.getElementById("aid").value;
-      console.log('aid', aid);
-      console.log('aidFlag', aid == '')
-      if (aid == '' || aid == undefined) {
-        document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
-        return
-      } else {
-
-        alert(aid)
-
-        FB.init({
-          appId: aid,
-          cookie: true,  // enable cookies to allow the server to access 
-          // the session
-          xfbml: true,  // parse social plugins on this page
-          version: 'v14.0' // Specify the Graph API version to use
-        });
-
+    
         FB.login(function (response) {
           if (response.authResponse) {
             console.log('Welcome!  Fetching your information.... ');
@@ -101,22 +84,29 @@
         FB.getLoginStatus(function (response) {
           statusChangeCallback(response);
         });
-      }
+      
 
     }
 
-    window.fbAsyncInit = function () {
+    function test(){
+      var aid = document.getElementById("aid").value;
+      console.log('aid', aid);
+      if (aid == '') {
+        document.getElementById('status').innerHTML = '应用编号不能为空！';
+        return
+      }
       FB.init({
-        appId: '1962260513976354',
+        appId: aid,
         cookie: true,  // enable cookies to allow the server to access 
         // the session
         xfbml: true,  // parse social plugins on this page
         version: 'v14.0' // Specify the Graph API version to use
       });
-
-      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
-      document.getElementById('token').value = 'tttt';
-
+      document.getElementById('status').innerHTML = '请点击登陆按钮';
+    }
+    window.fbAsyncInit = function () {
+      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击 获取登陆信息 按钮 ';
+      document.getElementById('token').value = '';
     };
 
     // Load the SDK asynchronously
@@ -140,14 +130,9 @@
     }
   </script>
 
-  <!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
   <div class="d1">
     <label class="label1">应用编号:</label><input type="text" id="aid" class="txt1">
+    <button onclick="test()" style="width:250px;height: 30px;"> 获取登陆信息</button>
     <div style="width: 300px;height: 20px;"></div>
     <fb:login-button scope="public_profile,email" onlogin="loginInit();" data-size="large"
       data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
