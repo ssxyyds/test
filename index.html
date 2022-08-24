@@ -69,39 +69,31 @@
 
 
     function loginInit() {
-    
-        FB.login(function (response) {
-          if (response.authResponse) {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function (response) {
-              console.log('Good to see you, ' + response.name + '.');
-            });
-          } else {
-            console.log('User cancelled login or did not fully authorize.');
-          }
-        });
+      FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+      });
 
-        FB.getLoginStatus(function (response) {
-          statusChangeCallback(response);
-        });
-      
 
     }
 
-    function test(){
+    function test() {
       var aid = document.getElementById("aid").value;
       console.log('aid', aid);
       if (aid == '') {
         document.getElementById('status').innerHTML = '应用编号不能为空！';
         return
       }
-      FB.init({
-        appId: aid,
-        cookie: true,  // enable cookies to allow the server to access 
-        // the session
-        xfbml: true,  // parse social plugins on this page
-        version: 'v14.0' // Specify the Graph API version to use
-      });
+      try {
+        FB.init({
+          appId: aid,
+          cookie: true,  // enable cookies to allow the server to access 
+          // the session
+          xfbml: true,  // parse social plugins on this page
+          version: 'v14.0' // Specify the Graph API version to use
+        });
+      } catch (error) {
+        alert("error")
+      }
       document.getElementById('status').innerHTML = '请点击登陆按钮';
     }
     window.fbAsyncInit = function () {
