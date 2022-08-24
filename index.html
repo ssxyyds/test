@@ -70,35 +70,38 @@
 
     function loginInit() {
       var aid = document.getElementById("aid").value;
-      console.log('aid',aid);
-      if (aid == '') {
+      console.log('aid', aid);
+      console.log('aidFlag', aid == '')
+      if (aid == '' || aid == undefined) {
         document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
         return
+      } else {
+
+        alert(aid)
+
+        FB.init({
+          appId: aid,
+          cookie: true,  // enable cookies to allow the server to access 
+          // the session
+          xfbml: true,  // parse social plugins on this page
+          version: 'v14.0' // Specify the Graph API version to use
+        });
+
+        FB.login(function (response) {
+          if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+              console.log('Good to see you, ' + response.name + '.');
+            });
+          } else {
+            console.log('User cancelled login or did not fully authorize.');
+          }
+        });
+
+        FB.getLoginStatus(function (response) {
+          statusChangeCallback(response);
+        });
       }
-      alert(aid)
-
-      FB.init({
-        appId: '1962260513976354',
-        cookie: true,  // enable cookies to allow the server to access 
-        // the session
-        xfbml: true,  // parse social plugins on this page
-        version: 'v14.0' // Specify the Graph API version to use
-      });
-
-      FB.login(function (response) {
-        if (response.authResponse) {
-          console.log('Welcome!  Fetching your information.... ');
-          FB.api('/me', function (response) {
-            console.log('Good to see you, ' + response.name + '.');
-          });
-        } else {
-          console.log('User cancelled login or did not fully authorize.');
-        }
-      });
-
-      FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-      });
 
     }
 
@@ -112,7 +115,7 @@
       });
 
       document.getElementById('status').innerHTML = '请先输入应用编号,然后点击登陆按钮';
-      document.getElementById('token').value = '';
+      document.getElementById('token').value = 'tttt';
 
     };
 
