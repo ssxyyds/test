@@ -74,6 +74,10 @@
       });
     }
 
+    window.fbAsyncInit = function() {
+
+    }
+
     function test() {
       var aid = document.getElementById("aid").value;
       console.log('aid', aid);
@@ -95,8 +99,7 @@
       document.getElementById('status').innerHTML = '请点击登陆按钮';
     }
     window.fbAsyncInit = function () {
-      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击 获取登陆信息 按钮 ';
-      document.getElementById('token').value = '';
+      test()
     };
 
     // Load the SDK asynchronously
