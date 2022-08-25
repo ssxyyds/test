@@ -58,24 +58,10 @@
       }
     }
 
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-      FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-      });
-    }
-
-
     function loginInit() {
       FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
       });
-    }
-
-    window.fbAsyncInit = function() {
-
     }
 
     function test() {
@@ -96,9 +82,12 @@
       } catch (error) {
         alert("error")
       }
-      document.getElementById('status').innerHTML = '请点击登陆按钮';
+      document.getElementById('status').innerHTML = '请点击上方登陆按钮';
     }
     window.fbAsyncInit = function () {
+      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击 获取登陆信息 按钮 ';
+      document.getElementById('aid').value = '1962260513976354';
+      document.getElementById('token').value = '';
       test()
     };
 
