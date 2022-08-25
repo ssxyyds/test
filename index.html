@@ -29,7 +29,7 @@
 
     .txt2 {
       width: 250px;
-      height: 80px;
+      height: 120px;
     }
   </style>
   <meta charset="UTF-8">
@@ -83,10 +83,12 @@
         alert("error")
       }
       document.getElementById('status').innerHTML = '请点击上方登陆按钮';
+      document.getElementById('tips').innerHTML = '应用编号变更后,请重新点击[获取登陆信息]按钮';
     }
     window.fbAsyncInit = function () {
       document.getElementById('status').innerHTML = '请先输入应用编号,然后点击 获取登陆信息 按钮 ';
-      document.getElementById('aid').value = '1962260513976354';
+      document.getElementById('tips').innerHTML = '';
+      document.getElementById('aid').value = '';
       document.getElementById('token').value = '';
       test()
     };
@@ -121,6 +123,7 @@
     </fb:login-button>
 
     <div id="status" class="label1"></div>
+    <div id="tips" class="label1"></div>
     <textarea id="token" class="txt2"></textarea>
   </div>
 
