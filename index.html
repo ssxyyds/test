@@ -48,7 +48,7 @@
 
       if (response.status === 'connected') {
         // Logged into your app and Facebook.
-        document.getElementById('status').innerHTML = '返回令牌如下';
+        document.getElementById('status').innerHTML = '用户访问口令如下';
         document.getElementById('token').value = response.authResponse.accessToken;
         testAPI();
       } else {
@@ -86,11 +86,10 @@
       document.getElementById('tips').innerHTML = '应用编号变更后,请重新点击[获取登陆信息]按钮';
     }
     window.fbAsyncInit = function () {
-      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击 获取登陆信息 按钮 ';
+      document.getElementById('status').innerHTML = '请先输入应用编号,然后点击[获取登陆信息]按钮';
       document.getElementById('tips').innerHTML = '';
       document.getElementById('aid').value = '';
       document.getElementById('token').value = '';
-      test()
     };
 
     // Load the SDK asynchronously
